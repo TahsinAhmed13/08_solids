@@ -632,9 +632,9 @@ void scanline_convert( struct matrix *points, int i, screen s, zbuffer zb )
     double dx1, dy1, dz1;
     double x0, x1, z0, z1, y;
 
-    c.red   = (((i / 3) + 1) % 6) & 1 ? 128 : 0; 
-    c.green = (((i / 3) + 1) % 6) & 2 ? 128 : 0; 
-    c.blue  = (((i / 3) + 1) % 6) & 4 ? 128 : 0; 
+    c.red   = (((i / 3) + 1) % 6) & 1 ? 255 : 0; 
+    c.green = (((i / 3) + 1) % 6) & 2 ? 255 : 0; 
+    c.blue  = (((i / 3) + 1) % 6) & 4 ? 255 : 0; 
 
     if( points->m[1][i] <= points->m[1][i+1] &&
         points->m[1][i] <= points->m[1][i+2] )
