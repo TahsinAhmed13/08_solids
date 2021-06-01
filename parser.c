@@ -87,12 +87,10 @@ void parse_file ( char * filename,
 {
   color c = { 255, 0, 0 }; 
   int steps = 100;
-  int steps_3d = 20;
+  int steps_3d = 15;
 
   FILE *f;
   char line[256];
-  clear_screen(s);
-  clear_zbuffer(zb);
 
   struct matrix * tmp;
   struct matrix * tmp_3d;
@@ -102,12 +100,20 @@ void parse_file ( char * filename,
   else
     f = fopen(filename, "r");
   
+  clear_screen(s);
+  clear_zbuffer(zb);
+
+  tmp = new_matrix(4, 4);
+  tmp_3d = new_matrix(4, 4);
+
   while ( fgets(line, 255, f) != NULL ) {
     line[strlen(line)-1]='\0';
     printf(":%s:\n",line);
 
+    /*
     tmp = new_matrix(4, 4);
     tmp_3d = new_matrix(4, 4);
+    */
     
     if ( !strcmp(line, "line") )
     {
@@ -249,13 +255,18 @@ void parse_file ( char * filename,
     matrix_mult(peek(csystems), tmp);
     for(int i = 0; i < tmp->lastcol; ++i)
         add_point(edges, tmp->m[0][i], tmp->m[1][i], tmp->m[2][i]);
-    free_matrix(tmp);
+    tmp->lastcol = 0;
+    // free_matrix(tmp);
 
     matrix_mult(peek(csystems), tmp_3d);
     for(int i = 0; i < tmp_3d->lastcol; ++i)
         add_point(polygons, tmp_3d->m[0][i], tmp_3d->m[1][i], tmp_3d->m[2][i]);
-    free_matrix(tmp_3d);
+    tmp_3d->lastcol = 0;
+    // free_matrix(tmp_3d);
   }
+
+  free_matrix(tmp);
+  free_matrix(tmp_3d);
 
   fclose(f); 
 }

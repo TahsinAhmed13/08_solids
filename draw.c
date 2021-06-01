@@ -572,6 +572,7 @@ void add_torus( struct matrix * edges,
     {
         for(int j = long_start; j < long_end; ++j)
         {
+            /*
             add_polygon(edges, 
                     torus->m[0][k],         torus->m[1][k],         torus->m[2][k],
                     torus->m[0][k+steps+2], torus->m[1][k+steps+2], torus->m[2][k+steps+2],
@@ -581,6 +582,17 @@ void add_torus( struct matrix * edges,
                     torus->m[0][k],         torus->m[1][k],         torus->m[2][k],
                     torus->m[0][k+1],       torus->m[1][k+1],       torus->m[2][k+1],
                     torus->m[0][k+steps+2], torus->m[1][k+steps+2], torus->m[2][k+steps+2]
+                    );
+            */
+            add_polygon(edges, 
+                    torus->m[0][k],         torus->m[1][k],         torus->m[2][k],
+                    torus->m[0][k+steps+1], torus->m[1][k+steps+1], torus->m[2][k+steps+1],
+                    torus->m[0][k+steps+2], torus->m[1][k+steps+2], torus->m[2][k+steps+2]
+                    );
+            add_polygon(edges, 
+                    torus->m[0][k],         torus->m[1][k],         torus->m[2][k],
+                    torus->m[0][k+steps+2], torus->m[1][k+steps+2], torus->m[2][k+steps+2],
+                    torus->m[0][k+1],       torus->m[1][k+1],       torus->m[2][k+1]
                     );
             k++;
         }
