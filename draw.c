@@ -470,11 +470,11 @@ void add_sphere( struct matrix * edges,
     int long_start = 0; 
     int long_end = steps;
     
-    int k = 0;
     for(int i = lat_start; i < lat_end; ++i)
     {
         for(int j = long_start; j < long_end; ++j)
         {
+            int k = i * (steps+1) + j;       
             if(j != steps-1)
             {
                 add_polygon(edges, 
@@ -491,9 +491,7 @@ void add_sphere( struct matrix * edges,
                         sphere->m[0][k+steps+1],    sphere->m[1][k+steps+1],    sphere->m[2][k+steps+1]
                         );
             }
-            k++;
         }
-        k++;
     }
 
     free_matrix(sphere);
@@ -567,23 +565,11 @@ void add_torus( struct matrix * edges,
     int long_start = 0; 
     int long_end = steps;
 
-    int k = 0;
     for(int i = lat_start; i < lat_end; ++i)
     {
         for(int j = long_start; j < long_end; ++j)
         {
-            /*
-            add_polygon(edges, 
-                    torus->m[0][k],         torus->m[1][k],         torus->m[2][k],
-                    torus->m[0][k+steps+2], torus->m[1][k+steps+2], torus->m[2][k+steps+2],
-                    torus->m[0][k+steps+1], torus->m[1][k+steps+1], torus->m[2][k+steps+1]
-                    );
-            add_polygon(edges, 
-                    torus->m[0][k],         torus->m[1][k],         torus->m[2][k],
-                    torus->m[0][k+1],       torus->m[1][k+1],       torus->m[2][k+1],
-                    torus->m[0][k+steps+2], torus->m[1][k+steps+2], torus->m[2][k+steps+2]
-                    );
-            */
+            int k = i * (steps+1) + j;
             add_polygon(edges, 
                     torus->m[0][k],         torus->m[1][k],         torus->m[2][k],
                     torus->m[0][k+steps+1], torus->m[1][k+steps+1], torus->m[2][k+steps+1],
@@ -594,9 +580,7 @@ void add_torus( struct matrix * edges,
                     torus->m[0][k+steps+2], torus->m[1][k+steps+2], torus->m[2][k+steps+2],
                     torus->m[0][k+1],       torus->m[1][k+1],       torus->m[2][k+1]
                     );
-            k++;
         }
-        k++;
     }
 
     free_matrix(torus);
