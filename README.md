@@ -1,3 +1,3 @@
 # 08_solids
 
-![ballons.png](ballons)
+![ballons](ballons.png)
